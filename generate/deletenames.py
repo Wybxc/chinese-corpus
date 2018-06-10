@@ -1,10 +1,8 @@
-import chardet
+from opentext import opentext
 stopwords = ['姨','舅','叔','伯','姐夫','嫂','弟妹','表弟','表妹','表哥','表姐','你们','媳妇']
 
 def do(filename):
-  with open(filename, 'rb') as f:
-    f_encoding = chardet.detect(f.read())['encoding']
-  with open(filename, 'r', encoding=f_encoding) as f:
+  with opentext(filename, 'r') as f:
     import re
     from extractnames import gen
     text = f.read()

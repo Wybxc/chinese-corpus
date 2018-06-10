@@ -1,5 +1,5 @@
 from isname import is_name
-import chardet
+from opentext import opentext
 def getNames(l):
   ret = ''
   for i in l:
@@ -17,9 +17,7 @@ def cut(f):
       yield i
 
 def gen(filename):
-  with open(filename, 'rb') as f:
-    f_encoding = chardet.detect(f.read())['encoding']
-  with open(filename, 'r', encoding=f_encoding) as f:
+  with opentext(filename, 'r') as f:
     l = getNames(cut(f))
     return set(l)
 

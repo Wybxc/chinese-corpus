@@ -5,3 +5,23 @@ def is_name(s):
     if (name in s) or ('阿' in s):
       return True
   return False
+
+t = None  
+def pseg():
+  global t
+  from thulac import thulac
+  if t is None:
+    t = thulac(filt = True)
+  return t
+  
+
+def has_name(s):
+  for w, s in pseg().cut(s):
+    if s in ('np', 'ns', 'nz'):
+      return True
+  return False
+  
+def get_name(s):
+  for w, s in pseg().cut(s):
+    if s in ('np', 'ns', 'nz'):
+      yield w

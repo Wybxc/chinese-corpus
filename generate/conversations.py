@@ -1,5 +1,4 @@
 import sys
-import chardet
 if __name__ != '__main__':
   sys.exit()
 
@@ -8,9 +7,8 @@ if len(sys.argv) <= 1:
   sys.exit()
 
 filename = sys.argv[1]
-with open(filename, 'rb') as f:
-  f_encoding = chardet.detect(f.read())['encoding']
-with open(filename, 'r', encoding=f_encoding) as f:
+from opentext import opentext
+with opentext(filename, 'r') as f:
   import re
   m_new = re.compile(r'\n\s*\n')
   m_msg = re.compile(r'“(.*?)”')

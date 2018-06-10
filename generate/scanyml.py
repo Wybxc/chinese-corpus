@@ -1,0 +1,41 @@
+import sys, yaml
+from opentext import opentext
+
+def do(filename, name):
+  with opentext(filename, 'r') as f:
+    y = yaml.load(f)
+    data = y['conversations']
+    
+  from isname import has_name
+  def scan(d):
+    for l in d:
+      for s in l:
+        if has_name(s):
+          break
+      else:
+        yield l
+        
+  def to_yml(f):
+    for l in f:
+      new = True
+      for i in l:
+        if new:
+          new = False
+          yield '- - ' + i + '\n'
+        else:
+          yield '  - ' + i + '\n'
+    
+  head = 'categories:\n- %s\nconversations:\n' % name
+  with open(name + '.yml', 'w', encoding='utf-8') as out:
+    out.write(head)
+    if len(data) != 0:
+      out.writelines(to_yml(scan(data)))
+    
+if __name__ == '__main__':
+  if len(sys.argv) <= 1:
+    print('请输入文件名!')
+    sys.exit()
+
+  filename = sys.argv[1]
+  name = input('请输入保存文件名：')
+  do(filename, name)
