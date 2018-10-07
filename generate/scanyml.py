@@ -10,8 +10,10 @@ def do(filename, name):
   def scan(d):
     for l in d:
       for s in l:
-        if has_name(s):
+        if has_name(str(s)):
           break
+        if len(str(s)) < 2:
+            break
       else:
         yield l
         
@@ -21,9 +23,9 @@ def do(filename, name):
       for i in l:
         if new:
           new = False
-          yield '- - ' + i + '\n'
+          yield '- - ' + str(i) + '\n'
         else:
-          yield '  - ' + i + '\n'
+          yield '  - ' + str(i) + '\n'
     
   head = 'categories:\n- %s\nconversations:\n' % name
   with open(name + '.yml', 'w', encoding='utf-8') as out:

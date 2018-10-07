@@ -17,7 +17,7 @@ def extractzip(filename, path='.'):
   with zipfile.ZipFile(filename, 'r') as f:
     for fn in f.namelist():
       extracted_path = Path(f.extract(fn), path)
-      extracted_path.rename(fn.encode('cp437').decode('gbk'))
+      #extracted_path.rename(fn.encode('cp437').decode('gbk'))
 
 def extract(filename, path='.'):
   if filename[-4:].lower() == '.zip':
