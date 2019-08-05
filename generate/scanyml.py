@@ -1,12 +1,13 @@
 import sys, yaml
 from opentext import opentext
 
+import isname
+from isname import has_name
 def do(filename, name):
   with opentext(filename, 'r') as f:
     y = yaml.load(f)
     data = y['conversations']
     
-  from isname import has_name
   def scan(d):
     for l in d:
       for s in l:
@@ -41,3 +42,4 @@ if __name__ == '__main__':
   filename = sys.argv[1]
   name = input('请输入保存文件名：')
   do(filename, name)
+  isname.debug_print()

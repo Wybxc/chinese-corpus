@@ -13,15 +13,40 @@ def pseg():
   if t is None:
     t = thulac(filt = True)
   return t
-  
+
+names = []
+
+import jieba.posseg
+
+def is_avl(s):
+    d = {}
+    for w, s in jieba.posseg.cut(s):
+        k = s[0]
+        if(d.get(k, 0) == 0):
+            d[k] = 0
+        d[k] += 1
+    if len(d.keys()) == 1:
+        return False
+    return True
 
 def has_name(s):
-  for w, s in pseg().cut(s):
-    if s in ('np', 'ns', 'nz'):
-      return True
-  return False
+  global names
+  nn = [w for w in get_name(s)]
+  names.extend(nn)
+  if len(names) > 100:
+    name = list(set(name))
+  for i in names:
+    if i in s:
+        return True
+  if len(nn) != 0:
+    return True
+  return not is_avl(s)
   
 def get_name(s):
   for w, s in pseg().cut(s):
     if s in ('np', 'ns', 'nz'):
       yield w
+      
+def debug_print():
+    for n in set(names):
+        print(n)
