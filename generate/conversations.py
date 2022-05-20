@@ -45,9 +45,9 @@ def to_yml(f):
       new = True
       continue
     if new:
-      yield '- - ' + i[2:]
+      yield f'- - {i[2:]}'
     else:
-      yield '  - ' + i[2:]
+      yield f'  - {i[2:]}'
     new = False
   
 print('对话处理完成！')
@@ -56,6 +56,6 @@ if check.strip().lower() == 'y':
   name = input('请输入文件名：').strip().strip('.yml')
   head = 'categories:\n- %s\nconversations:\n' % name
   with open(filename, 'r', encoding='utf-8') as f:
-    with open(name + '.yml', 'w', encoding='utf-8') as out:
+    with open(f'{name}.yml', 'w', encoding='utf-8') as out:
       out.write(head)
       out.writelines(to_yml(f))

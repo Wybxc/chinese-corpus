@@ -13,8 +13,7 @@ def getNames(l):
 import jieba.posseg as jieba
 def cut(f):
   for l in f:
-    for i in jieba.cut(l):
-      yield i
+    yield from jieba.cut(l)
 
 def gen(filename):
   with opentext(filename, 'r') as f:
