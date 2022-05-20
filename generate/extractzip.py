@@ -25,4 +25,4 @@ def extract(filename, path='.'):
   elif filename[-4:].lower() == '.rar':
     extractrar(filename, path)
   else:
-    print('不支持的格式:%s' % filename[-3:])
+    print(f'不支持的格式:{filename[-3:]}')

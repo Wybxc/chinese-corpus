@@ -24,9 +24,9 @@ def do(filename, name):
       for i in l:
         if new:
           new = False
-          yield '- - ' + str(i) + '\n'
+          yield f'- - {str(i)}' + '\n'
         else:
-          yield '  - ' + str(i) + '\n'
+          yield f'  - {str(i)}' + '\n'
     
   head = 'categories:\n- %s\nconversations:\n' % name
   with open(name + '.yml', 'w', encoding='utf-8') as out:

@@ -40,9 +40,9 @@ def do():
             new = True
             continue
           if new:
-            yield '- - ' + i[2:]
+            yield f'- - {i[2:]}'
           else:
-            yield '  - ' + i[2:]
+            yield f'  - {i[2:]}'
           new = False
 
       name = os.path.split(filename)[1]

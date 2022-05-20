@@ -8,19 +8,19 @@ def do(filename, name):
   for txt in temp.rglob('*.txt'):
     p = Path.cwd() / txt.name
     txt.rename(p)
-    
+
   import deal_alltxt, mergeyml, scanyml
   deal_alltxt.do()
-  tmpname = name + '_tmp'
+  tmpname = f'{name}_tmp'
   mergeyml.do(tmpname)
-  scanyml.do(tmpname + '.yml', name)
-  
-  Path(name + '.yml').rename('a.finished')
+  scanyml.do(f'{tmpname}.yml', name)
+
+  Path(f'{name}.yml').rename('a.finished')
   for txt in Path.cwd().glob('*.txt'):
     os.remove(str(txt.absolute()))
   for txt in Path.cwd().glob('*.yml'):
     os.remove(str(txt.absolute()))
-  Path('a.finished').rename(name + '.yml')
+  Path('a.finished').rename(f'{name}.yml')
     
 if __name__ == '__main__':
   filename = sys.argv[1]
